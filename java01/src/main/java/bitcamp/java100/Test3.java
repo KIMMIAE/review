@@ -1,31 +1,74 @@
-// # 자바에서 값 표현(literal)하기
-// 문자열, 정수, 부동소수점, 논리 값을 표현하는 방법
-//
+// ## printf() 사용법
+// - printf()의 사용법을 알아보자.
+// 예제 Test10_4
 
 package bitcamp.java100;
 
-public class Test11_1 {
+public class Test3 {
 
     public static void main(String[] args) {
-// 자바 코드로 문자열을 표현(=문자열 리터럴)하는 방법
-// 
-        System.out.println("문자열");
-
-// 자바 코드로 정수를 표현(=정수 리터럴)하는 방법
+// printf(): 특정 형식의 문자열을 만들어 출력한다.
+// => 형식
+//    %[argument_index$][flags][width][.precision]conversion
 //
-        System.out.println(100);
 
-// 자바 코드로 소수점이 있는 숫자를 표현(=부동소수점 리터럴)하는 방법
-//
-        System.out.println(3.14);
-        
-// 자바 코드로 논리 값을 표현(=불린 리터럴)하는 방법 
-// 불린 = boolean
-        System.out.println(true);
-        System.out.println(false);
+// => conversion 사용법
+//    %s, %S : 문자열
+//    %c, %C : 문자 
+//    %d : 10진수(decimal) 숫자
+//    %o : 8진수(octal) 숫자
+//    %x, %X : 16진수(hexadecimal) 숫자
+//    %h, %H : Integer.toHexString(arg.hashCode())의 리턴 값.
+//    %f : 부동소수점(floating point) 숫자
+//    %b, %B : boolean 값 
+//    %t, %T : Date/Time 값
+//    %n : 줄바꿈. \n 과 같다. 
+        System.out.printf("%s,%c,%d,%o,%x,%h,%f,%b,%tY\n", 
+            "홍길동",'가',100, 100, 100, 100, 
+            3.14, true, new java.util.Date());
 
-        // 대소문자를 구분하기 때문에 다음은 컴파일 오류!
-        //System.out.println(True);
-        //System.out.println(FALSE);
+// => [.precision]
+        System.out.printf("%f, %.1f, %.2f, %.3f, %.4f, %.5f\n", 
+            3.141592, 3.141592, 3.141592, 3.141592, 3.141592, 3.141592);
+
+// => [argument_index$]
+        System.out.printf("%1$f, %1$.1f, %1$.2f, %1$.3f, %1$.4f, %1$.5f\n", 3.141592);
+
+// => [width]
+        System.out.printf("%1$4s,%1$10s,%2$5.2f,%2$10.3f\n", "홍길동", 3.14);
+
+// => [flags]
+//    - : 왼쪽 정렬
+        System.out.printf("'%10s','%-10s'\n", "홍길동", "임꺽정");
+//    + : 부호 출력 
+        System.out.printf("%d, %+d\n", 100, 100);
+//    0 : 빈자리를 0으로 채우기
+        System.out.printf("%5d, %05d\n", 123, 123);
+
+// => 날짜/시간 다루기 : %t[날짜관련 접미사]
+//    H : Hour. 00 ~ 23
+//    I : Hour. 01 ~ 12
+//    M : Minute. 00 ~ 59
+//    S : Second. 00 ~ 60
+//    p : 오전(am), 오후(pm) 출력
+        System.out.printf("%1$tH, %1$tI, %1$tM, %1$tS, %1$tp\n", 
+            new java.util.Date());
+        System.out.printf("%1$tH:%1$tM:%1$tS\n", new java.util.Date());
+
+//    Y : Year. 4자리
+//    y : Year. 2자리
+//    m : Month. 01 ~ 12
+//    d : Day. 01 ~ 31
+//    e : Day. 1 ~ 31
+//    A : Week. "Sunday"
+//    a : Week. "Sun"
+//    B : Month name. "January"
+//    b : Month name. "Jan"
+        System.out.printf("%1$tY, %1$ty, %1$tm, %1$td, %1$te\n", 
+            new java.util.Date());
+        System.out.printf("%1$tm, %1$tB, %1$tb\n", 
+            new java.util.Date());
+        System.out.printf("%1$tA, %1$ta\n", 
+            new java.util.Date());    
     }
 }
